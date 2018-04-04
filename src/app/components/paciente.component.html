@@ -1,0 +1,39 @@
+<div class="row" style="margin-top:30px!important;">
+    <div class="col-6">
+        <h4>
+            Pacientes
+        </h4>
+    </div>
+    <div class="col-6 text-right">
+        <a href="#/createpaciente" role="button" class="btn btn-success">Nuevo Usuario</a> 
+    </div>    
+</div>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>id</th>
+                    <th>nombre</th>
+                    <th>edad</th>
+                    <th>sexo</th>  
+                    <th>action</th>                                
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let paciente of pacientes ">
+                    <td>{{paciente.PacienteId}}</td>
+                    <td>{{paciente.Nombre}}</td>
+                    <td>{{paciente.Edad}}</td>
+                    <td>{{paciente.Sexo}}</td>
+                    <td>
+                            <a href="#/editpaciente/{{paciente.PacienteId}}" role="button" class="btn btn-success">Edit</a> 
+                            <button class="btn btn-danger" href="#">Delete</button>
+                    </td>
+                </tr>
+            </tbody>        
+        </table>
+
+    </div>
+</div>
+        
