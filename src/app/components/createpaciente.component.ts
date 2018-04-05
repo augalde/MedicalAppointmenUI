@@ -49,8 +49,8 @@ export class CreatePacienteComponent {
         {
             this.showAlert = true;
         }
-    }   );
-        ; 
+    });
+         
 
         
     }

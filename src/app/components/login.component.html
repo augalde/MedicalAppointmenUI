@@ -1,0 +1,20 @@
+<div class="alert alert-success" role="alert" *ngIf="showAlert">
+    This is a success alert—check it out!
+  </div>
+
+<form>
+<div class="row">
+    <div class="col-12">
+    <div class="form-group">
+      <label for="exampleInputUser">User</label>
+      <input type="text" name="id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="User.Nombre">
+      <small id="emailHelp" class="form-text text-muted">User Identification</small>
+    </div>    
+</div>
+</div>
+<div class="row">
+    <div class="col-12">
+    <button type="button" (click)="ValidateFields()" class="btn btn-primary">Login</button>
+    </div>
+</div>
+  </form>

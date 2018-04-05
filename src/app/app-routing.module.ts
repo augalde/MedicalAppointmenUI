@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login.component';
 import {PacienteComponent} from './components/paciente.component';
 import {CreatePacienteComponent} from './components/createpaciente.component';
 import {EditPacienteComponent} from './components/editpaciente.component';
 import {CitaComponent} from './components/cita.component';
 
 const routes: Routes = [
-{path: '', redirectTo: 'pacientes', pathMatch: 'full'},
+{path: '', redirectTo: 'login', pathMatch: 'full'},
+{path: 'login', component:LoginComponent},
 {path: 'pacientes', component:PacienteComponent},
 {path: 'createpaciente', component: CreatePacienteComponent}, 
 {path: 'editpaciente/:id', component: EditPacienteComponent}, 

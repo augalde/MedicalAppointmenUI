@@ -1,4 +1,5 @@
-<div class="row" style="margin-top:30px!important;">
+
+<div class="row" style="margin:30px 0px!important;">
     <div class="col-6">
         <h4>
             Pacientes
@@ -28,7 +29,8 @@
                     <td>{{paciente.Sexo}}</td>
                     <td>
                             <a href="#/editpaciente/{{paciente.PacienteId}}" role="button" class="btn btn-success">Edit</a> 
-                            <button class="btn btn-danger" href="#">Delete</button>
+
+                            <button *ngIf="session.user.Rol=='Admin'" class="btn btn-danger" href="#">Delete</button> 
                     </td>
                 </tr>
             </tbody>        

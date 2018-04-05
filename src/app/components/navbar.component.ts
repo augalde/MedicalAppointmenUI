@@ -10,11 +10,11 @@ import { UtilityService } from '../services/utility.service'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'paciente',
-  templateUrl: './paciente.component.html',
-  styleUrls: ['./paciente.component.css']
+  selector: 'navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
 })
-export class PacienteComponent {
+export class NavbarComponent {
 
     public User: User = new User;
     public session: Session = new Session;
@@ -24,19 +24,16 @@ export class PacienteComponent {
     {
         this.session = SESSION;
 
-        this.pacienteService.getPacientes()
-        .do(pacientes => console.log("pacientes",pacientes))
-        .subscribe(pacientes => this.pacientes = pacientes)
     }
 
     ngOnInit() {
 
-        this.utilityService.isLogged().then((result: boolean) => {
-          if (!result) {
-            this.Router.navigate(['/login']);
-          }
+        // this.utilityService.isLogged().then((result: boolean) => {
+        //   if (!result) {
+        //     this.Router.navigate(['/login']);
+        //   }
     
-        });
+        // });
     }
   
 }

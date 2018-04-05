@@ -11,8 +11,9 @@ import {ActivatedRoute} from '@angular/router'
 export class EditPacienteComponent {
 
     public paciente: Paciente;
-    public response: Response;
+    public response: any;
     public showAlert:boolean = false;
+    public showFacil:boolean = false;
 
     constructor(private pacienteService:PacienteService, private activatedRoute: ActivatedRoute)
     {
@@ -44,10 +45,16 @@ export class EditPacienteComponent {
         .do(response => console.log("Paciente",response))
          .subscribe(response => {
          this.response = response;
+         console.log(this.response);
         // this.paciente.birthDate = new Date(<string>person.birthDate);
-        if(!this.response.ok)
+        if(this.response.operationStatus == true)
         {
+            console.log("listo")
             this.showAlert = true;
+        }
+        else{
+            this.showFacil = true;
+            
         }
     }   );
         ; 

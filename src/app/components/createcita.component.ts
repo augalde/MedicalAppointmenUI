@@ -16,24 +16,25 @@ import { UtilityService } from '../services/utility.service'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'cita',
-  templateUrl: './cita.component.html',
-  styleUrls: ['./cita.component.css']
+  selector: 'createcita',
+  templateUrl: './createcita.component.html',
+  styleUrls: ['./createcita.component.css']
 })
 export class CitaComponent {
     public User: User = new User;
     public session: Session = new Session;
-    public citas: Cita[];    
+    public cita: Cita;    
     public pacientes: Paciente[];    
     public tiposCitas: TipoCita[];
+
+    public response: Response;
+    public showAlert:boolean = false;
+    
     constructor(private tipoCitaService:TipoCitaService,private pacienteService:PacienteService, private citaService:CitaService, private activatedRoute: ActivatedRoute,private Router: Router, private utilityService: UtilityService)
     {
 
         this.session = SESSION;
-        //Citas
-        this.citaService.getCitas()
-        .do(citas => console.log("citas",citas))
-        .subscribe(citas => this.citas = citas)
+        
         //Pacientes
         this.pacienteService.getPacientes()
         .do(pacientes => console.log("pacientes",pacientes))
@@ -62,5 +63,18 @@ export class CitaComponent {
     {
         return  this.tiposCitas.find(x => x.TipoCitaId == tipocitaId).Descripcion;
     }
+
+    Salvar(){
+        console.log("CreateCita");
+        this.citaService.postCita(this.cita)       
+        .do(response => console.log("Cita",response))
+         .subscribe(response => {
+         this.response = response;
+        // this.paciente.birthDate = new Date(<string>person.birthDate);
+        if(!this.response.ok)
+        {
+            this.showAlert = true;
+        }
+    });
   
 }

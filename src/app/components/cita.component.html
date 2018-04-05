@@ -1,1 +1,39 @@
-cita
+<div class="row" style="margin:30px 0px!important;">
+    <div class="col-6">
+        <h4>
+            Citas
+        </h4>
+    </div>
+    <div class="col-6 text-right">
+        <a href="#/createpaciente" role="button" class="btn btn-success">Nuevo Cita</a> 
+    </div>    
+</div>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Numero</th>
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                    <th>Tipo Cita</th>  
+                    <th>Accion</th>                                
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cita of citas ">
+                    <td>{{cita.Id}}</td>                    
+                    <td>{{getPaciente(cita.PacienteId)}}</td>
+                    <td>{{cita.Fecha}}</td>
+                    <td>{{getTipoCita(cita.TipoCitaId)}}</td>
+                    <td>
+                            <a href="#/editcita/{{cita.Id}}" role="button" class="btn btn-success">Edit</a> 
+
+                            <button *ngIf="session.user.Rol=='Admin'" class="btn btn-danger" href="#">Delete</button> 
+                    </td>
+                </tr>
+            </tbody>        
+        </table>
+
+    </div>
+</div>
