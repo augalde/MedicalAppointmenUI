@@ -7,6 +7,8 @@ import {EditPacienteComponent} from './components/editpaciente.component';
 import {CitaComponent} from './components/cita.component';
 import {CreateCitaComponent} from './components/createcita.component';
 
+import {DeleteCitaComponent} from './components/deletecita.component';
+
 const routes: Routes = [
 {path: '', redirectTo: 'login', pathMatch: 'full'},
 {path: 'login', component:LoginComponent},
@@ -14,8 +16,8 @@ const routes: Routes = [
 {path: 'createpaciente', component: CreatePacienteComponent}, 
 {path: 'editpaciente/:id', component: EditPacienteComponent}, 
 {path: 'citas', component: CitaComponent},
-{path: 'createcita', component: CreateCitaComponent}
- 
+{path: 'createcita', component: CreateCitaComponent},
+{path: 'deletecita/:id', component:DeleteCitaComponent}
 // {path: 'show/:id', component: ShowComponent},
 // {path: 'edit/:id', component: EditComponent}
 ];

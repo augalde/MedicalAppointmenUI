@@ -14,6 +14,8 @@ import { CreatePacienteComponent } from './components/createpaciente.compon
 import { EditPacienteComponent } from './components/editpaciente.component';
 import { CitaComponent } from './components/cita.component';
 import { CreateCitaComponent } from './components/createcita.component';
+import {DeleteCitaComponent} from './components/deletecita.component';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -31,6 +33,7 @@ LoginComponent,
 PacienteComponent,
 CreatePacienteComponent ,
  EditPacienteComponent ,
+DeleteCitaComponent,
 CitaComponent,
  CreateCitaComponent 
 ],

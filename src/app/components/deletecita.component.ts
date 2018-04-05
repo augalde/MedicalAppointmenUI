@@ -16,11 +16,11 @@ import { UtilityService } from '../services/utility.service'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'createcita',
-  templateUrl: './createcita.component.html',
-  styleUrls: ['./createcita.component.css']
+  selector: 'deletecita',
+  templateUrl: './deletecita.component.html',
+  styleUrls: ['./deletecita.component.css']
 })
-export class CreateCitaComponent {
+export class DeleteCitaComponent {
     public User: User = new User;
     public session: Session = new Session;
     public cita: Cita;    
@@ -31,8 +31,6 @@ export class CreateCitaComponent {
 
     public response: Response;
     public showAlert:boolean = false;
-    
-    public showFail:boolean = false;
 
     public fechaCita:Date;
     public horaCita:any;
@@ -61,6 +59,18 @@ export class CreateCitaComponent {
           }
     
         });
+
+        this.activatedRoute.paramMap.subscribe(paramMap => {
+            let id: number = +paramMap.get('id'); // (+) converts to number
+            
+            this.citaService.getCita(id)
+            .do(cita => console.log("Paciente",cita))
+            .subscribe(cita => {
+            this.cita =cita;
+            // this.paciente.birthDate = new Date(<string>person.birthDate);
+             });
+            }); 
+
         this.loadGlobalVariables();
         console.log("tipocit2",this.tiposCitas);
     }
@@ -90,17 +100,8 @@ export class CreateCitaComponent {
         this.cita.PacienteId = this.paciente.PacienteId;
         this.cita.TipoCitaId =  this.tipoCita.TipoCitaId;
         this.cita.Fecha  =  this.fechaCita;
-
         let nowVar = new Date();
-        
-         let date1: string = nowVar.toString();//params.data.incidentTime;
-        let date2: string = this.cita.Fecha.toString();
-
-        let diffInMs: number = Date.parse(date2) - Date.parse(date1);
-        let diffInHours: number = diffInMs / 1000 / 60 / 60;
-
-        // validating restriccion 24hours
-         if(diffInHours > 24)
+         if(this.fechaCita)
          {
             console.log("CreateCita");
             this.citaService.postCita(this.cita)       
@@ -111,14 +112,12 @@ export class CreateCitaComponent {
             if(!this.response.ok)
             {
                 this.showAlert = true;
-                this.showFail = false;
             }
             
         });
          }
-         else{             
-            this.showAlert = false;
-            this.showFail = true;
+         else{
+             
          }
     }
   

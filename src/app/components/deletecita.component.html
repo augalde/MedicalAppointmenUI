@@ -1,0 +1,40 @@
+<navbarapointment></navbarapointment>
+<div class="row" style="margin:30px 0px!important;">
+    <div class="col-6">
+        <h4>
+            Citas
+        </h4>
+    </div>
+    <div class="col-6 text-right">
+        <a href="#/createcita" role="button" class="btn btn-success">Nuevo Cita</a> 
+    </div>    
+</div>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Numero</th>
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                    <th>Tipo Cita</th>  
+                    <th>Accion</th>                                
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                        <!-- cita{{cita|json}} -->
+                    <td>{{cita.Id}}</td>                    
+                    <td>{{getPaciente(cita.PacienteId) }}</td> 
+                    <td>{{cita.Fecha}}</td>
+                    <td>{{getTipoCita(cita.TipoCitaId)}}</td>
+                    <td>
+                            <button type="button" (click)="Delete()" class="btn btn-primary">Delete</button>
+                    </td>
+                </tr>
+            </tbody>        
+        </table>
+        <!-- pacientes{{pacientes|json}}
+        tipos{{tiposCitas|json}} -->
+    </div>
+</div>

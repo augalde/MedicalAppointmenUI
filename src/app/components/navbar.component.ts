@@ -35,5 +35,12 @@ export class NavbarComponent {
     
         // });
     }
-  
+    logout(){
+        localStorage.clear();
+        this.utilityService.isLogged().then((result:boolean)=>{
+        if(!result){
+        this.Router.navigate(['/login']);
+        }
+        });
+        } 
 }
