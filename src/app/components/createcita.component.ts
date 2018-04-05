@@ -20,29 +20,35 @@ import { Router } from '@angular/router';
   templateUrl: './createcita.component.html',
   styleUrls: ['./createcita.component.css']
 })
-export class CitaComponent {
+export class CreateCitaComponent {
     public User: User = new User;
     public session: Session = new Session;
     public cita: Cita;    
+    public paciente: Paciente;
     public pacientes: Paciente[];    
     public tiposCitas: TipoCita[];
+    public tipoCita: TipoCita;
 
     public response: Response;
     public showAlert:boolean = false;
-    
+
+    public fechaCita:Date;
+    public horaCita:any;
+
     constructor(private tipoCitaService:TipoCitaService,private pacienteService:PacienteService, private citaService:CitaService, private activatedRoute: ActivatedRoute,private Router: Router, private utilityService: UtilityService)
     {
 
+        this.fechaCita=new Date();
+
         this.session = SESSION;
+        this.cita = new Cita();
+        this.cita.PacienteId = -1;
+        this.cita.Id = -1;
+        this.cita.Fecha = new Date();
+        this.cita.TipoCitaId = -1;
+        this.fechaCita;
+        this.tiposCitas = [];  
         
-        //Pacientes
-        this.pacienteService.getPacientes()
-        .do(pacientes => console.log("pacientes",pacientes))
-        .subscribe(pacientes => this.pacientes = pacientes)
-        //TipoCitas
-        this.tipoCitaService.getTipoCitas()
-        .do(tiposCitas => console.log("tipoCitas",tiposCitas))
-        .subscribe(tiposCitas => this.tiposCitas = tiposCitas)
     }
 
     ngOnInit() {
@@ -53,8 +59,22 @@ export class CitaComponent {
           }
     
         });
+        this.loadGlobalVariables();
+        console.log("tipocit2",this.tiposCitas);
     }
 
+    loadGlobalVariables()
+    {
+        //Pacientes
+        this.pacienteService.getPacientes()
+        .do(pacientes => console.log("pacientes",this.pacientes))
+        .subscribe(pacientes => this.pacientes = pacientes)
+        //TipoCitas
+        this.tipoCitaService.getTipoCitas()
+        .do(tiposCitas => console.log("tipoCitas",tiposCitas))
+        .subscribe(tiposCitas => this.tiposCitas = tiposCitas)
+
+    }
     getPaciente(pacienteId) : string
     {
         return  this.pacientes.find(x => x.PacienteId == pacienteId).Nombre;
@@ -65,6 +85,10 @@ export class CitaComponent {
     }
 
     Salvar(){
+        this.cita.PacienteId = this.paciente.PacienteId;
+        this.cita.TipoCitaId =  this.tipoCita.TipoCitaId;
+        this.cita.Fecha  =  this.fechaCita;
+         
         console.log("CreateCita");
         this.citaService.postCita(this.cita)       
         .do(response => console.log("Cita",response))
@@ -76,5 +100,6 @@ export class CitaComponent {
             this.showAlert = true;
         }
     });
+}
   
 }

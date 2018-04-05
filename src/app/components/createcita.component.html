@@ -1,30 +1,43 @@
+<navbarapointment></navbarapointment>
 <div class="alert alert-success" role="alert" *ngIf="showAlert">
     Cita Creada
   </div>
 
 <form>
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
     <div class="form-group">
-      <label for="exampleInputEmail1">Paciente ID</label>
-      <input type="number" name="id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="cita.PacienteId">
+      <!-- <label for="exampleInputEmail1">Paciente ID</label> -->
+      <!-- <input type="number" name="id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="cita.PacienteId"> -->
+      <div class="form-group">
+        <label for="exampleInputNombre">Paciente</label>
+        <select class="form-control" name="Parameter" id="" [(ngModel)]="paciente">
+            <option [ngValue]="param" selected disabled>--Make a selection--</option>
+            <option [ngValue]="p" *ngFor="let p of pacientes">{{p.PacienteId}} - {{p.Nombre}}</option>
+          </select>
+    </div> 
       <small id="emailHelp" class="form-text text-muted">Your Identification</small>
     </div>
     <div class="form-group">
-      <label for="exampleInputNombre">Nombre</label>
-      <input type="datetime" name="nombre" class="form-control" [(ngModel)]="cita.Fecha" id="exampleInputnombre" placeholder="Nombre">
+      <label for="exampleInputNombre">Fecha</label>
+      <input type="datetime-local" min="2018-01-01" step="60" [(ngModel)]="fechaCita"  name="nombre" class="form-control"  id="exampleInputnombre" placeholder="Nombre">
+      
     </div>
-</div>
-<div class="col-6">
-    <div class="form-group">
-            <label for="exampleInputNombre">Edad</label>
-            <input type="number" name="edad"  class="form-control" [(ngModel)]="cita.TipoCitaId" id="exampleInputedad" placeholder="Edad">
+
+    <!-- <div class="form-group">
+            <label for="exampleInputNombre">Hora</label>
+            <input name="TimeAppointment" type="time" [(ngModel)]="horaCita" min="06:00" max="21:00" step="60" value="06:00">
+            
             <small id="emailHelp" class="form-text text-muted">your real age</small>
-          </div>
+          </div> -->
           <div class="form-group">
-                <label for="exampleInputNombre">Sexo</label>
-                <input type="text" name="masculino"  class="form-control" [(ngModel)]="paciente.Sexo" id="exampleInputSexo" placeholder="Masculino/Femenino/Otro">
-              </div>
+                <label for="exampleInputNombre">Tipo Cita</label>
+                <!-- <input type="number" name="id" min="1" max=10 value="1" step="1" class="form-control" [(ngModel)]="cita.TipoCitaId" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="cita.PacienteId"> -->
+                <select class="form-control" name="Parameter" id="" [(ngModel)]="tipoCita">
+                     <option [ngValue]="param" selected disabled>--Make a selection--</option>
+                    <option [ngValue]="p" *ngFor="let p of tiposCitas">{{p.Descripcion}}</option>
+                  </select>
+            </div>
 </div> 
 </div>
 <div class="row">

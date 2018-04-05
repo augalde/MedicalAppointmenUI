@@ -9,6 +9,8 @@ export class PacienteService {
   public searchTerm: string;
   server = 'http://localhost:56486/api';
 
+  result:any;
+  
   constructor(private httpClient: HttpClient) { }
 
   getPacientes(): Observable<any> {    

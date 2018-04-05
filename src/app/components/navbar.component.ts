@@ -10,7 +10,7 @@ import { UtilityService } from '../services/utility.service'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'navbar',
+  selector: 'navbarapointment',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

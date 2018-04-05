@@ -13,7 +13,7 @@ import { PacienteComponent } from './components/paciente.component';
 import { CreatePacienteComponent } from './components/createpaciente.component';
 import { EditPacienteComponent } from './components/editpaciente.component';
 import { CitaComponent } from './components/cita.component';
-
+import { CreateCitaComponent } from './components/createcita.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -31,7 +31,8 @@ LoginComponent,
 PacienteComponent,
 CreatePacienteComponent ,
  EditPacienteComponent ,
-CitaComponent
+CitaComponent,
+ CreateCitaComponent 
 ],
 imports: [
 BrowserModule,
