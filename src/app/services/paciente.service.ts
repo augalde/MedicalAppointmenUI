@@ -4,10 +4,13 @@ import 'rxjs/Rx'; // For methods for Observables
 import { Observable } from 'rxjs/Observable';
 import { Paciente } from '../models/paciente';
 
+
+import { environment } from '../../environments/environment';
+
 @Injectable()
 export class PacienteService {
   public searchTerm: string;
-  server = 'http://localhost:56486/api';
+  server = environment.avaApiBaseUrl;
 
   result:any;
   

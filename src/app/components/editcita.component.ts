@@ -130,53 +130,19 @@ export class EditCitaComponent {
     }
     IsCitaFromSameUserSameDate() : boolean
     {
-                
-        //let localCita:Cita = this.citas.find(x => x.PacienteId == this.cita.PacienteId && ((x.Fecha.setHours(0,0,0,0)) == (this.cita.Fecha.setHours(0,0,0,0))));
-        let thereAreCitas = false;
-        this.citas.forEach(element => {
-            if(element.PacienteId == this.cita.PacienteId && element.Id != this.cita.Id)
-            {
-                console.log(element.Fecha);
-                console.log(this.cita.Fecha);
-                
-                // let da1:number = element.Fecha.setHours(0,0,0,0);
-                // let da2:number = this.cita.Fecha.setHours(0,0,0,0);
-                // console.log(da1);
-                // console.log(da2);
+        let citaDate: Date = new Date(this.cita.Fecha)
+        let specificDay = citaDate.getDate();
+        let month = citaDate.getMonth();
+        let year = citaDate.getFullYear();
+        console.log(specificDay);
 
-                let date1: string = element.Fecha.toString();//params.data.incidentTime;
-               let date2: string = this.cita.Fecha.toString();
-       
-               let diffInMs: number = Date.parse(date2) - Date.parse(date1);
-               let diffInHours: number = diffInMs / 1000 / 60 / 60;
-               console.log(diffInHours); 
-               // element.Fecha.setHours(0,0,0,0);
-                // this.cita.Fecha.setHours(0,0,0,0);
-                
-                // var diff = Math.abs(element.Fecha.getTime() - this.cita.Fecha.getTime());
-                // var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-                // if(diffDays <=1)
-                //if(element.Fecha.getDate() === this.cita.Fecha.getDate())
-                if(diffInHours < 24 && diffInHours > -24)
-                {
-                    thereAreCitas = true;                    
-                }
-            }
+        let localCita:Cita[] = this.citas.filter(x => x.PacienteId == this.cita.PacienteId && new Date(x.Fecha).getDate() == specificDay && new Date(x.Fecha).getMonth() == month && new Date(x.Fecha).getFullYear() == year && x.Id != this.cita.Id) ;
 
-        });
-
-        if(thereAreCitas)
+        if(localCita && localCita.length > 0)
         {
             return true;
         }
-        //this.localCita = this.citas.find(x => x.PacienteId == this.cita.PacienteId);
-
-        //console.log("citaval",localCita);
-        // if(localCita == undefined)
-        // {
-        //     return false;
-        // }
-        return false;
+        return false;        
     }
 
     isValidTipoCita() : boolean
