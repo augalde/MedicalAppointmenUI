@@ -64,7 +64,7 @@ export class DeleteCitaComponent {
             let id: number = +paramMap.get('id'); // (+) converts to number
             
             this.citaService.getCita(id)
-            .do(cita => console.log("Paciente",cita))
+            .do(cita => console.log("cita ",cita))
             .subscribe(cita => {
             this.cita =cita;
             // this.paciente.birthDate = new Date(<string>person.birthDate);
@@ -79,32 +79,55 @@ export class DeleteCitaComponent {
     {
         //Pacientes
         this.pacienteService.getPacientes()
-        .do(pacientes => console.log("pacientes",this.pacientes))
+        .do(pacientes => console.log("pacientes",pacientes))
         .subscribe(pacientes => this.pacientes = pacientes)
         //TipoCitas
         this.tipoCitaService.getTipoCitas()
         .do(tiposCitas => console.log("tipoCitas",tiposCitas))
         .subscribe(tiposCitas => this.tiposCitas = tiposCitas)
+        
 
     }
     getPaciente(pacienteId) : string
     {
-        return  this.pacientes.find(x => x.PacienteId == pacienteId).Nombre;
+        console.log("getPaciente "+ JSON.stringify(this.pacientes) );
+        if(this.pacientes == undefined || this.pacientes.length <= 0)
+        {
+            return "";
+        }
+        let obj : any = this.pacientes.find(x => x.PacienteId == pacienteId);
+        if(obj == undefined)
+        {
+            return "";
+        }
+         let stringVar : string = obj.Nombre;
+         console.log(stringVar);
+         console.log("::getPaciente");
+        return  stringVar;
     }
-    getTipoCita(tipocitaId) : string
+    getTipoCita(TipoCitaId) : string
     {
-        return  this.tiposCitas.find(x => x.TipoCitaId == tipocitaId).Descripcion;
+        
+        console.log("gettipoCita");
+        if(this.tiposCitas == undefined || this.tiposCitas.length <= 0)
+        {
+            return "";
+        }
+        let obj : any = this.tiposCitas.find(x => x.TipoCitaId == TipoCitaId);
+        if(obj == undefined)
+        {
+            return "";
+        }
+         let stringVar : string = obj.Descripcion;
+         console.log(stringVar);
+        return  stringVar;
     }
 
-    Salvar(){
-        this.cita.PacienteId = this.paciente.PacienteId;
-        this.cita.TipoCitaId =  this.tipoCita.TipoCitaId;
-        this.cita.Fecha  =  this.fechaCita;
-        let nowVar = new Date();
-         if(this.fechaCita)
-         {
-            console.log("CreateCita");
-            this.citaService.postCita(this.cita)       
+    Delete(){
+        
+         
+            console.log("Delete");
+            this.citaService.deleteCita(this.cita.Id)       
             .do(response => console.log("Cita",response))
             .subscribe(response => {
             this.response = response;
@@ -115,10 +138,8 @@ export class DeleteCitaComponent {
             }
             
         });
-         }
-         else{
-             
-         }
+
+         
     }
   
 }

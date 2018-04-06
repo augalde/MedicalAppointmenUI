@@ -1,4 +1,8 @@
 <navbarapointment></navbarapointment>
+<div class="alert alert-success" role="alert" *ngIf="showAlert">
+        Cita Borrada
+      </div>
+
 <div class="row" style="margin:30px 0px!important;">
     <div class="col-6">
         <h4>
@@ -29,9 +33,10 @@
                     <td>{{cita.Fecha}}</td>
                     <td>{{getTipoCita(cita.TipoCitaId)}}</td>
                     <td>
-                            <a href="#/editcita/{{cita.Id}}" role="button" class="btn btn-success">Edit</a> 
-
-                            <button *ngIf="session.user.Rol=='Admin'" class="btn btn-danger" href="#">Delete</button> 
+                            <!-- <a href="#/editcita/{{cita.Id}}" role="button" class="btn btn-success">Edit</a> -->
+                            <a  (click)="Delete(cita.Id)" *ngIf="session.user.Rol=='Admin'" role="button" class="btn btn-danger">Delete</a> 
+                            <!-- href="#/deletecita/{{cita.Id}}" -->
+                            <!-- <button href="#"  class="btn btn-danger" >Delete</button>  -->
                     </td>
                 </tr>
             </tbody>        

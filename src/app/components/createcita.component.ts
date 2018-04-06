@@ -30,12 +30,16 @@ export class CreateCitaComponent {
     public tipoCita: TipoCita;
 
     public response: Response;
-    public showAlert:boolean = false;
-    
-    public showFail:boolean = false;
+    public showAlert:boolean = false;    
+    public showFail24:boolean = false;
+    public showFailday:boolean = false;
 
     public fechaCita:Date;
     public horaCita:any;
+    
+    public citas: Cita[]; 
+
+    private localCita:Cita[];
 
     constructor(private tipoCitaService:TipoCitaService,private pacienteService:PacienteService, private citaService:CitaService, private activatedRoute: ActivatedRoute,private Router: Router, private utilityService: UtilityService)
     {
@@ -76,6 +80,39 @@ export class CreateCitaComponent {
         .do(tiposCitas => console.log("tipoCitas",tiposCitas))
         .subscribe(tiposCitas => this.tiposCitas = tiposCitas)
 
+        //Citas 
+        this.citaService.getCitas()
+        .do(citas => console.log("citas",citas))
+        .subscribe(citas => this.citas = citas)
+
+    }
+
+    
+    IsCitaFromSameUserSameDate() : boolean
+    {
+                
+        //let localCita:Cita = this.citas.find(x => x.PacienteId == this.cita.PacienteId && ((x.Fecha.setHours(0,0,0,0)) == (this.cita.Fecha.setHours(0,0,0,0))));
+
+        this.citas.forEach(element => {
+            if(element.PacienteId == this.cita.PacienteId)
+            {
+                var diff = Math.abs(element.Fecha.getTime() - this.cita.Fecha.getTime());
+                var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+                if(diffDays <=1)
+                {
+                    return true;
+                }
+            }
+
+        });
+        //this.localCita = this.citas.find(x => x.PacienteId == this.cita.PacienteId);
+
+        //console.log("citaval",localCita);
+        // if(localCita == undefined)
+        // {
+        //     return false;
+        // }
+        return false;
     }
     getPaciente(pacienteId) : string
     {
@@ -102,23 +139,34 @@ export class CreateCitaComponent {
         // validating restriccion 24hours
          if(diffInHours > 24)
          {
-            console.log("CreateCita");
-            this.citaService.postCita(this.cita)       
-            .do(response => console.log("Cita",response))
-            .subscribe(response => {
-            this.response = response;
-            // this.paciente.birthDate = new Date(<string>person.birthDate);
-            if(!this.response.ok)
-            {
-                this.showAlert = true;
-                this.showFail = false;
-            }
-            
-        });
+            // if(!this.IsCitaFromSameUserSameDate())
+            // {
+                    console.log("CreateCita");
+                    this.citaService.postCita(this.cita)       
+                    .do(response => console.log("Cita",response))
+                    .subscribe(response => {
+                    this.response = response;
+                    // this.paciente.birthDate = new Date(<string>person.birthDate);
+                    if(!this.response.ok)
+                    {
+                        this.showAlert = true;
+                        this.showFail24 = false;
+                        this.showFailday = false;
+                    }
+                    
+                    
+                });
+            // }
+            // else{             
+            //     this.showAlert = false;
+            //     this.showFail24 = false;
+            //     this.showFailday = true;
+            //  }
          }
          else{             
             this.showAlert = false;
-            this.showFail = true;
+            this.showFail24 = true;
+            this.showFailday = false;
          }
     }
   

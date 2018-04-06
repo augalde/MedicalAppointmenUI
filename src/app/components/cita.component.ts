@@ -33,6 +33,11 @@ export class CitaComponent {
     public listaPacientes : CitaDTO[];
 
     private  paciente  = new Paciente();
+
+    public response: Response;
+    
+    public showAlert:boolean = false;
+
     constructor(private tipoCitaService:TipoCitaService,private pacienteService:PacienteService, private citaService:CitaService, private activatedRoute: ActivatedRoute,private Router: Router, private utilityService: UtilityService)
     {
         
@@ -152,5 +157,26 @@ export class CitaComponent {
          console.log(stringVar);
         return  stringVar;
     }
+
+
+    Delete(Id){
+        
+         
+        console.log("Delete");
+        this.citaService.deleteCita(Id)       
+        .do(response => console.log("Cita",response))
+        .subscribe(response => {
+        this.response = response;
+        // this.paciente.birthDate = new Date(<string>person.birthDate);
+        if(!this.response.ok)
+        {
+            this.showAlert = true;
+            this.Initialize();
+        }
+        
+    });
+
+     
+}
   
 }

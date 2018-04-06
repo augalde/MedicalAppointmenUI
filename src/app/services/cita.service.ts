@@ -23,9 +23,13 @@ export class CitaService {
       );
   }
 
-  getCita(id: number): Observable<Cita> {
-    return this.httpClient.get<CitaResponse>(this.server + 'Citas/' + id)
-      .map(({cita}) => cita); // Destructuring!!!
+  getCita(id: number): Observable<any> {
+    return this.httpClient.get(this.server + 'Citas/' + id)      
+      .map((response: Response)=>{
+        let result = response;
+        return result;
+    }
+    );
   }
 
   setPaciente(cita: Cita): Observable<Cita> {
@@ -39,6 +43,15 @@ export class CitaService {
         let result = response;
         return result;
     });
+  }
+
+  deleteCita(id: number): Observable<any> {
+    return this.httpClient.delete(this.server + 'Citas/' + id)      
+      .map((response: Response)=>{
+        let result = response;
+        return result;
+    }
+    );
   }
 
 }

@@ -1,12 +1,13 @@
 <navbarapointment></navbarapointment>
+<div class="alert alert-success" role="alert" *ngIf="showAlert">
+        Cita Borrada
+      </div>
+
 <div class="row" style="margin:30px 0px!important;">
-    <div class="col-6">
+    <div class="col-12">
         <h4>
-            Citas
+            Cita
         </h4>
-    </div>
-    <div class="col-6 text-right">
-        <a href="#/createcita" role="button" class="btn btn-success">Nuevo Cita</a> 
     </div>    
 </div>
 <div class="row">
@@ -22,14 +23,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngIf="cita != undefined">
                         <!-- cita{{cita|json}} -->
                     <td>{{cita.Id}}</td>                    
                     <td>{{getPaciente(cita.PacienteId) }}</td> 
                     <td>{{cita.Fecha}}</td>
                     <td>{{getTipoCita(cita.TipoCitaId)}}</td>
                     <td>
-                            <button type="button" (click)="Delete()" class="btn btn-primary">Delete</button>
+                            <button type="button" (click)="Delete()" class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
             </tbody>        
