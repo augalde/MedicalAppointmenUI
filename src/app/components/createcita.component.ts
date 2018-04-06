@@ -33,6 +33,7 @@ export class CreateCitaComponent {
     public showAlert:boolean = false;    
     public showFail24:boolean = false;
     public showFailday:boolean = false;
+    public strMessage : string = "";
 
     public fechaCita:Date;
     public horaCita:any;
@@ -148,6 +149,9 @@ export class CreateCitaComponent {
     }
 
     Salvar(){
+        this.showAlert = false;
+                        this.showFailday = false;
+
         this.cita.PacienteId = this.paciente.PacienteId;
         this.cita.TipoCitaId =  this.tipoCita.TipoCitaId;
         this.cita.Fecha  =  this.fechaCita;
@@ -160,7 +164,7 @@ export class CreateCitaComponent {
         let diffInMs: number = Date.parse(date2) - Date.parse(date1);
         let diffInHours: number = diffInMs / 1000 / 60 / 60;
 
-        // validating restriccion 24hours
+       // validating restriccion 24hours
          if(diffInHours > 24)
          {
             if(!this.IsCitaFromSameUserSameDate())
@@ -171,26 +175,31 @@ export class CreateCitaComponent {
                     .subscribe(response => {
                     this.response = response;
                     // this.paciente.birthDate = new Date(<string>person.birthDate);
+                    
                     if(!this.response.ok)
                     {
                         this.showAlert = true;
-                        this.showFail24 = false;
                         this.showFailday = false;
+                    }
+                    else{
+                        this.strMessage = this.response.toString();
+                        this.showAlert = false;
+                        this.showFailday = true;
                     }
                     
                     
                 });
-            }
+           }
             else{             
                 this.showAlert = false;
-                this.showFail24 = false;
                 this.showFailday = true;
+                this.strMessage = "No se pudo Crear la Cita del Paciente. Restriccion: Paciente tiene cita agendada mismo dia."
              }
          }
          else{             
             this.showAlert = false;
-            this.showFail24 = true;
-            this.showFailday = false;
+            this.strMessage = "No se pudo Crear la Cita del Paciente. Restriccion 24 horas.";
+            this.showFailday = true;
          }
     }
   

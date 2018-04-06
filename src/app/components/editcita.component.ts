@@ -191,6 +191,9 @@ export class EditCitaComponent {
     }
 
     Edid(){
+        this.showAlert = false;
+                    this.strErrorMessage =   "";
+                    this.showFailday = false;
         // this.cita.PacienteId = this.paciente.PacienteId;
         // this.cita.TipoCitaId =  this.tipoCita.TipoCitaId;
         // this.cita.Fecha  =  this.fechaCita;

@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## About Solution
+
+Citas and Pacientes implemented
+## TODO
+-Clean Solution: remove commented code, refactor functions and minimize code
+-Pending input Validations and returns from the API
+-change styles and responses - more friendly UI
+-Create DTO and fill with the information to e displayed
