@@ -33,7 +33,7 @@
                     <td>{{cita.Fecha}}</td>
                     <td>{{getTipoCita(cita.TipoCitaId)}}</td>
                     <td>
-                            <!-- <a href="#/editcita/{{cita.Id}}" role="button" class="btn btn-success">Edit</a> -->
+                            <a href="#/editcita/{{cita.Id}}" role="button" class="btn btn-success">Edit</a>
                             <a  (click)="Delete(cita.Id)" *ngIf="session.user.Rol=='Admin'" role="button" class="btn btn-danger">Delete</a> 
                             <!-- href="#/deletecita/{{cita.Id}}" -->
                             <!-- <button href="#"  class="btn btn-danger" >Delete</button>  -->

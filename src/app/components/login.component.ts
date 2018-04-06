@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit  {
 
         this.utilityService.isLogged().then((result: boolean) => {
           if (result) {
-            this.Router.navigate(['/pacientes']);
+            this.Router.navigate(['/citas']);
           }
     
         });
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit  {
                 SESSION.user = this.session.user;
                 SESSION.timestamp = this.session.timestamp;
                 localStorage.setItem('Session', JSON.stringify(this.session));
-                this.Router.navigate(['/pacientes']);
+                this.Router.navigate(['/citas']);
                }
             //    if (this.session.user.Rol !== "") {
             //      this.Router.navigate(['/pacientes']);

@@ -7,6 +7,7 @@ import {EditPacienteComponent} from './components/editpaciente.component';
 import {CitaComponent} from './components/cita.component';
 import {CreateCitaComponent} from './components/createcita.component';
 
+import { EditCitaComponent } from './components/editcita.component';
 import {DeleteCitaComponent} from './components/deletecita.component';
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
 {path: 'editpaciente/:id', component: EditPacienteComponent}, 
 {path: 'citas', component: CitaComponent},
 {path: 'createcita', component: CreateCitaComponent},
-{path: 'deletecita/:id', component:DeleteCitaComponent}
+{path: 'deletecita/:id', component:DeleteCitaComponent},
+{path: 'editcita/:id', component: EditCitaComponent }
 // {path: 'show/:id', component: ShowComponent},
 // {path: 'edit/:id', component: EditComponent}
 ];

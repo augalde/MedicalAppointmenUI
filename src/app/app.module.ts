@@ -14,6 +14,7 @@ import { CreatePacienteComponent } from './components/createpaciente.compon
 import { EditPacienteComponent } from './components/editpaciente.component';
 import { CitaComponent } from './components/cita.component';
 import { CreateCitaComponent } from './components/createcita.component';
+import { EditCitaComponent } from './components/editcita.component';
 import {DeleteCitaComponent} from './components/deletecita.component';
 
 
@@ -35,6 +36,7 @@ CreatePacienteComponent ,
  EditPacienteComponent ,
 DeleteCitaComponent,
 CitaComponent,
+ EditCitaComponent ,
  CreateCitaComponent 
 ],
 imports: [

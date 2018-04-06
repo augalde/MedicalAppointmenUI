@@ -32,9 +32,13 @@ export class CitaService {
     );
   }
 
-  setPaciente(cita: Cita): Observable<Cita> {
-    return this.httpClient.post<CitaResponse>(this.server + 'Citas/' , cita)
-      .map(({cita}) => cita); // Destructuring!!!
+  setCita(cita: Cita): Observable<any> {
+    return this.httpClient.put(this.server + 'Citas/' , cita)
+    .map((response: Response)=>{
+      let result = response;
+      return result;
+  }
+  );
   }
 
   postCita(cita: Cita): Observable<any> {
